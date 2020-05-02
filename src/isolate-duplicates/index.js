@@ -8,9 +8,15 @@ function isolateDuplicates(text) {
     let insertions = 0;
     for (let i = 0; i < splittedString.length; i++){
         let letter1 = splittedString[i];
-        let letter2 = splittedString[i + 1];
-        const string1 = convert(letter1);
-        const string2 = convert(letter2);
+        const string1 = letter1.toLowerCase();
+        let string2 = "";
+        if (i === splittedString.length-1){
+            string2 = ' ';
+        }
+        else{
+            let letter2 = splittedString[i + 1];
+            string2 = letter2.toLowerCase();
+        }
         if (string1 === string2){
             frequency++;
             if (frequency == 2){
@@ -37,17 +43,5 @@ function isolateDuplicates(text) {
     return result;
 }
 
-function convert(str){
-    let uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    let lowercase = 'abcdefghijklmnopqrstuvwxyz';
-    for (let i = 0; i < uppercase.length; i++){
-        if (uppercase[i] == str){
-            return lowercase[i];
-        }
-        else if (lowercase[i] == str){
-            return str;
-        }
-    }
-}
 
 module.exports = isolateDuplicates;
