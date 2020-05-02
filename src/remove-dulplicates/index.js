@@ -8,14 +8,14 @@ function removeDuplicates(obj) {
     for (let i = values.length-1; i > -1; i--){
         
         let temp = [];
-        let uniqArr = getUnique(values[i])
+        let uniqArr = [...new Set(values[i])];
         values[i] = uniqArr;
         let len = values[i].length;
         for (let j = 0; j < len; j++){
 
-            let string = checkControl(values[i][j], control)
-            if (string != ''){
-                temp.push(string);
+            let validatestring = control.includes(values[i][j]);
+            if (validatestring === false){
+                temp.push(values[i][j]);
             }
 
         }
@@ -34,30 +34,5 @@ function removeDuplicates(obj) {
 
     return result;
 }
-
-function getUnique(arr){
-    let unique = [...new Set(arr)];
-    return unique;
-}
-
-function checkControl(string, controlArr){
-    let check = false;
-    for (let k = 0; k < controlArr.length; k++){
-        if (string == controlArr[k]){
-            check = true;
-            break;
-        }
-        else {
-            check = false
-        }
-    }
-    if (check == false){
-        return string;
-    }
-    else {
-        return '';
-    }
-}
-
 
 module.exports = removeDuplicates;
